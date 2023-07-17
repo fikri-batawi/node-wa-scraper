@@ -1,49 +1,42 @@
-const { Client, LocalAuth } = require('whatsapp-web.js');
-const qrcode = require('qrcode-terminal');
-const {getLibraryEvents} = require('./scrapers/perpus-agenda-literasi');
-const {getNews} = require('./scrapers/detik-news');
-const command = require('./datas/commands/command')
-const {startWhatsapp} = require('./utils/whatsapp/whatsapp')
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
 
-// const waClient = new Client({
-//     authStrategy : new LocalAuth()
-// });
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 
-// waClient.on('qr', (qr) => {
-//     qrcode.generate(qr, {small: true});
-// });
+var app = express();
 
-// waClient.on('ready', () => {
-//     console.log('Client ready');
-// });
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
-// const handlerListMessage = (documents) => {
-//     let message = '';
-//     documents.forEach(document => {
-//         for(const [keys, value] of Object.entries(document)){
-//             message += `${keys} : ${value} \n`;
-//         }
-//         message+= '\n'
-//     });
-//     return message;
-// }
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/sb-admin-2', express.static(path.join(__dirname, 'node_modules/startbootstrap-sb-admin-2')));
 
-// waClient.on('message', async msg => {
-//     if(msg.body === '!help'){
-//         const textReply = handlerListMessage(command)
-//         waClient.sendMessage(msg.from, textReply)
-//     }else if(msg.body === '!show-agenda-literasi'){
-//         const events = await getLibraryEvents();
-//         const textReply = handlerListMessage(events)
-//         msg.reply(textReply);
-//     }else if(msg.body === '!berita-hari-ini'){
-//         const news = await getNews();
-//         const textReply = handlerListMessage(news)
-//         msg.reply(textReply);
-//     }
-// });
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 
-// waClient.initialize();
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
 
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-startWhatsapp("Fikri");
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+
+module.exports = app;
