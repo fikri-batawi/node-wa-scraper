@@ -1,9 +1,11 @@
 const {existsSync, readFileSync} = require('node:fs')
 
+const path = './datas/commands/';
+
 const getPathCommand = (client) => {
     const clientToLower = client.toLowerCase();
-    const pathClientCommand = `./datas/commands/${clientToLower}-command.json`;
-    const pathBasicCommand = `./datas/commands/basic-command.json`;
+    const pathClientCommand = `${path + clientToLower}-command.json`;
+    const pathBasicCommand = `${path}basic-command.json`;
     return existsSync(pathClientCommand) ? pathClientCommand : pathBasicCommand;
 }
 

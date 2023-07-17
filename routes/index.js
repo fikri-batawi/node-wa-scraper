@@ -1,9 +1,17 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const {loadClientCommand} = require('../utils/whatsapp/command')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+
+  // Load Command
+  const commands = loadClientCommand("Fikri");
+
+  res.render('index', { 
+    title: 'Dashboard',
+    commands,
+  });
 });
 
 module.exports = router;

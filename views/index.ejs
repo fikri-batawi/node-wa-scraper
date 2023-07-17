@@ -24,8 +24,88 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+					<div class="row">
+                        <!-- Tasks Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Username for login whatsapp
+                                            </div>
+                                            <div class="row no-gutters align-items-center">
+												<form class="form-inline">
+													<div class="form-group mr-sm-3 mb-2">
+													  <input type="text" class="form-control" id="username" placeholder="Username">
+													</div>
+													<button type="submit" class="btn btn-primary mb-2">Submit</button>
+												</form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tasks Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Status
+                                            </div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Offline</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+					<!-- Page Heading -->
+					<h1 class="h3 mb-2 text-gray-800">Auto Reply</h1>
+
+					<!-- DataTales Example -->
+					<div class="card shadow mb-4">
+						<div class="card-header py-3">
+							<h6 class="m-0 font-weight-bold text-primary">Message - Reply</h6>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+									<thead>
+										<tr>
+											<th>No</th>
+											<th>Message</th>
+											<th>Reply</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+                                        <% commands.forEach((command, key) => { %>
+                                            <tr>
+                                                <td><%= key + 1 %></td>
+                                                <td><%= command.message %></td>
+                                                <td><%= command.reply %></td>
+                                                <td>
+                                                    <a href="#" class="btn btn-info btn-icon-split">
+                                                        <span class="text">Edit</span>
+                                                    </a>
+                                                    <a href="#" class="btn btn-danger btn-icon-split">
+                                                        <span class="text">Delete</span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <% }) %>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
 
                 </div>
                 <!-- /.container-fluid -->
