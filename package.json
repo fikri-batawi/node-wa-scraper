@@ -13,6 +13,7 @@
     "express": "^4.18.2",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
+    "node-localstorage": "^2.2.1",
     "qrcode": "^1.5.3",
     "startbootstrap-sb-admin-2": "^4.1.4",
     "whatsapp-web.js": "^1.21.0"
